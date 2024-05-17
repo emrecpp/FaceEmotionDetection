@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% block content %}
+<script>
+    function resimYuklenemedi() {
+        //document.querySelector('.img').src = "{{ url_for('static', filename='images/placeholder.png') }}";
+        const img = document.querySelector(".img")
+        img.src='static/images/loading.gif';
+        img.style.width = "128"
+        img.style.height = "128"
+        img.style.borderRadius = "50%"
+    }
+</script>
+<div class="flex flex-col gap-10 max-w-7xl justify-evenly m-auto h-full">
+    <style>
+
+        .img {
+            width: 1000px;
+            height: 600px;
+            border-radius: 20px;
+            margin:auto;
+        }
+        </style>
+    <h1 class="text-center font-bold text-5xl text-slate-600">Duygunu Söyle ve Göster</h1>
+    <img style="box-shadow: 0 0 10px black;" class="img mt-10" src="{{ url_for('kameradan_goruntu_al') }}" alt="Kullanıcı Resmi"
+    onerror="resimYuklenemedi()">
+</div>
+<br>
+
+{% endblock %}

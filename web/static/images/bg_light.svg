@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg fill="none" viewBox="0 0 2941 5618" xmlns="http://www.w3.org/2000/svg">
+<circle cx="875" cy="4763" r="855" fill="url(#g)" fill-opacity=".11"/>
+<circle cx="944" cy="2785" r="571" fill="url(#f)" fill-opacity=".12"/>
+<circle cx="855" cy="3550" r="855" fill="url(#e)" fill-opacity=".11"/>
+<circle cx="2080.5" cy="3964.5" r="849.5" fill="url(#d)" fill-opacity=".12"/>
+<circle cx="989" cy="571" r="571" fill="url(#c)" fill-opacity=".12"/>
+<circle cx="2086" cy="2306" r="855" fill="url(#b)" fill-opacity=".11"/>
+<circle cx="1585" cy="685" r="571" fill="url(#a)" fill-opacity=".12"/>
+<defs>
+<radialGradient id="g" cx="0" cy="0" r="1" gradientTransform="translate(875 4763) rotate(90) scale(855)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F7FEF" offset="0"/>
+<stop stop-color="#fff" stop-opacity="0" offset="1"/>
+</radialGradient>
+<radialGradient id="f" cx="0" cy="0" r="1" gradientTransform="translate(944 2785) rotate(90) scale(571)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#490FEF" offset="0"/>
+<stop stop-color="#fff" stop-opacity="0" offset="1"/>
+</radialGradient>
+<radialGradient id="e" cx="0" cy="0" r="1" gradientTransform="translate(855 3550) rotate(90) scale(855)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F7FEF" offset="0"/>
+<stop stop-color="#fff" stop-opacity="0" offset="1"/>
+</radialGradient>
+<radialGradient id="d" cx="0" cy="0" r="1" gradientTransform="translate(2080.5 3964.5) rotate(90) scale(849.5)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#490FEF" offset="0"/>
+<stop stop-color="#fff" stop-opacity="0" offset="1"/>
+</radialGradient>
+<radialGradient id="c" cx="0" cy="0" r="1" gradientTransform="translate(989 571) rotate(90) scale(571)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F7FEF" offset="0"/>
+<stop stop-color="#fff" stop-opacity="0" offset="1"/>
+</radialGradient>
+<radialGradient id="b" cx="0" cy="0" r="1" gradientTransform="translate(2086 2306) rotate(90) scale(855)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F7FEF" offset="0"/>
+<stop stop-color="#fff" stop-opacity="0" offset="1"/>
+</radialGradient>
+<radialGradient id="a" cx="0" cy="0" r="1" gradientTransform="translate(1585 685) rotate(90) scale(571)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#490FEF" offset="0"/>
+<stop stop-color="#fff" stop-opacity="0" offset="1"/>
+</radialGradient>
+</defs>
+</svg>

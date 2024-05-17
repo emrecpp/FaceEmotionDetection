@@ -1,0 +1,32 @@
+<html lang="tr">
+
+<head>
+    <title>Duygunu Söyle ve Göster | Emre Demircan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-image: url("static/images/bg_light.svg");
+        }
+    </style>
+</head>
+
+<body class="flex flex-col justify-center min-h-screen h-full p-10">
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <p class="text-neutral-600 font-bold text-center mt-auto">Emre Demircan</p>
+    </footer>
+</body>
+</html>
