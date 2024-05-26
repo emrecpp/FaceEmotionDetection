@@ -67,9 +67,10 @@ class VideoCamera:
                 roi_gray = cv2.resize(roi_gray, (48, 48))
                 img = roi_gray.reshape((1, 48, 48, 1))
                 img = img / 255.0
-
-                max_index = np.argmax(model.predict(img.reshape((1, 48, 48, 1))), axis=-1)[0]
-
+                predict_result = model.predict(img.reshape((1, 48, 48, 1)))
+                val_angry, val_disgust, val_fear, val_happy, val_sad, val_surprise, val_neutral = predict_result[0]
+                max_index = np.argmax(predict_result, axis=-1)[0]
+                print(f"Happy: {val_happy*100:.2f} - Neutral: {val_neutral*100:2f}")
                 #print("Model çıktısı index: ", max_index)
 
                 enum_emotion = Emotions(max_index)
