@@ -21,7 +21,9 @@ def kameradan_goruntu_al():
     #return Response(b"test", mimetype='multipart/x-mixed-replace; boundary=frame')
     return Response(generate(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
+@app.get("/stats")
+def stats():
+    return {"happy":0.78, "neutral":0.22 }
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

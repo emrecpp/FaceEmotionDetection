@@ -53,7 +53,7 @@ class VideoCamera:
 
         return result
     def get_frame(self):
-        ret, test_img = self.video.read()  # captures frame and returns boolean value and captured image
+        ret, test_img = self.video.read()
         gray_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2GRAY)
 
         font = cv2.FONT_HERSHEY_SIMPLEX
