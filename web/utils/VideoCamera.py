@@ -15,7 +15,8 @@ face_haar_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_f
 print("Model yüklendi.")
 
 class VideoCamera:
-    def __init__(self):
+    def __init__(self, shareData):
+        self.shareData = shareData
         self.video = cv2.VideoCapture(0)
         dir_images:str = f"{os.getcwd()}{os.sep}utils{os.sep}images{os.sep}" # emojilerin olduğu klasör
         for emotion in emotions_as_string:
@@ -69,8 +70,16 @@ class VideoCamera:
                 img = img / 255.0
                 predict_result = model.predict(img.reshape((1, 48, 48, 1)))
                 val_angry, val_disgust, val_fear, val_happy, val_sad, val_surprise, val_neutral = predict_result[0]
+                val_angry, val_disgust, val_fear, val_happy, val_sad, val_surprise, val_neutral = float(val_angry.item()*100), float(val_disgust.item()*100), float(val_fear.item()*100), float(val_happy.item()*100), float(val_sad.item()*100), float(val_surprise.item()*100), float(val_neutral.item()*100) # .item() ile numpy float32 objesini python float a çeviriyoruz yoksa json dump olmuyor
                 max_index = np.argmax(predict_result, axis=-1)[0]
-                print(f"Happy: {val_happy*100:.2f} - Neutral: {val_neutral*100:2f}")
+                #print(f"Happy: {val_happy:.2f} - Neutral: {val_neutral:2f}")
+                self.shareData.stats = {
+                    "happy": {"percentage": round(val_happy, 2), "title": "Mutlu"},
+                    "neutral": {"percentage": round(val_neutral, 2), "title": "Normal"},
+                    "sad": {"percentage": round(val_sad, 2), "title": "Üzgün"},
+                    "angry": {"percentage": round(val_angry, 2), "title": "Kızgın"},
+                    "disgust": {"percentage": round(val_disgust, 2), "title": "İğrenmiş"},
+                }
                 #print("Model çıktısı index: ", max_index)
 
                 enum_emotion = Emotions(max_index)
@@ -116,7 +125,7 @@ class VideoCamera:
 
 
         except Exception as err:
-            helper.hataKodGoster("VideoCamera get_frame hata:")
+            helper.hataKodGoster("VideoCamera get_frame hata: " + str(err))
 
         resized_img = cv2.resize(test_img, (1000, 600))
         _, jpg = cv2.imencode('.jpg', resized_img)
