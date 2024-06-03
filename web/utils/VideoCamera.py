@@ -79,6 +79,8 @@ class VideoCamera:
                     "sad": {"percentage": round(val_sad, 2), "title": "Üzgün"},
                     "angry": {"percentage": round(val_angry, 2), "title": "Kızgın"},
                     "disgust": {"percentage": round(val_disgust, 2), "title": "İğrenmiş"},
+                    "fear": {"percentage": round(val_fear, 2), "title": "Korkmuş"},
+                    "surprise": {"percentage": round(val_surprise, 2), "title": "Şaşırmış"}
                 }
                 #print("Model çıktısı index: ", max_index)
 
