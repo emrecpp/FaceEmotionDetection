@@ -3,7 +3,8 @@
 <head>
     <title>Duygunu Söyle ve Göster | Emre Demircan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script async src="https://cdn.tailwindcss.com"></script> -->
+    <script src="/static/tailwind.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -21,7 +22,7 @@
     </style>
 </head>
 
-<body class="flex flex-col justify-center min-h-screen p-10">
+<body class="flex flex-col justify-center min-h-screen px-10 py-5">
     {% block content %}
     {% endblock %}
 

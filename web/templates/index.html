@@ -18,6 +18,12 @@
                         return
 
                     let enYuksekSkorluDuygu = Object.keys(data).reduce((a, b) => data[a].percentage > data[b].percentage ? a : b);
+                    console.log("enYuksekSkorluDuygu: ", enYuksekSkorluDuygu, "secilmisDuygu", secilmisDuygu)
+                    if (enYuksekSkorluDuygu === secilmisDuygu) {
+                        isSecilmisDuyguYapildi = true
+                        updateDuyguTexts()
+                    }
+
                     for (const [key, value] of Object.entries(data)) {
                         const targetStat = document.getElementById(`statlar-${key}`)
                         targetStat.querySelector("p").innerHTML = `${value.title}`;
@@ -34,18 +40,44 @@
         }
 
         let secilmisDuygu = null;
+        let isSecilmisDuyguYapildi = false
+        const TIMEOUT_FOR_SECILENDUYGU = 10 // 10 saniye içerisinde seçilen duyguyu yapması lazım eğer yapmazsa kalanHak 1 azalacak
+        let secilenDuyguTimer = 0
+        let kalanHak = 3
 
         function rastgeleDuyguIste() {
-            secilmisDuygu = ["happy", "neutral", "sad", "angry", "disgust", "fear", "surprise"][Math.floor(Math.random() * 7)]
+            let yeniDuygu;
+            do {
+                yeniDuygu = ["happy", "neutral", "sad", "angry", "disgust", "fear", "surprise"][Math.floor(Math.random() * 7)]
+            } while (yeniDuygu === secilmisDuygu) // tekrar aynı duyguyu vermesin diye
+            secilmisDuygu = yeniDuygu
+            isSecilmisDuyguYapildi = false
+            updateDuyguTexts()
+
+
+        }
+
+        function updateDuyguTexts() {
             const secilmisDuyguElement = document.getElementById("secilmis-duygu")
-            secilmisDuyguElement.innerHTML = `Seçilmiş Duygu: <b>${secilmisDuygu}</b>`
-            secilmisDuyguElement.style.display = "block"
+            const secilenDuyguText = secilmisDuyguElement.getElementsByTagName("span")[0]
+            const secilenDuyguYapildiImages = secilmisDuyguElement.getElementsByTagName("img")
+
+            secilmisDuyguElement.style.display = secilmisDuygu !== null ? "flex" : "hidden"
+
+            secilenDuyguText.innerHTML = `Seçilmiş Duygu: <b>${secilmisDuygu}</b>`
+
+            secilenDuyguYapildiImages[0].style.display = isSecilmisDuyguYapildi ? "none" : "block" // Çarpı
+            secilenDuyguYapildiImages[1].style.display = !isSecilmisDuyguYapildi ? "none" : "block" // Okay
+
+
+            secilenDuyguTimer = 0
+            //setTimeout()
 
         }
 
         var statIntervalId = setInterval(statlariOku, 200);
     </script>
-    <div class="flex flex-col gap-10 max-w-7xl justify-evenly m-auto">
+    <div class="flex flex-col gap-4 max-w-7xl justify-evenly m-auto">
         <style>
 
             .img {
@@ -76,25 +108,28 @@
                 margin: auto;
             }
         </style>
-        <h1 class="text-center font-bold text-5xl text-slate-600">Duygunu Söyle ve Göster</h1>
-        <p id="secilmis-duygu" class="text-neutral-500 text-3xl text-center" style="display: none">Seçilmiş Duygu: </p>
+        <h1 class="text-center font-bold text-3xl text-slate-600">Duygunu Söyle ve Göster</h1>
+
         <div class="relative">
             <img style="box-shadow: 0 0 10px black;" class="img mt-10" src="{{ url_for('kameradan_goruntu_al') }}"
                  alt="Kullanıcı Resmi"
                  onerror="resimYuklenemedi()">
 
-                <button class="bg-yellow-400 hover:bg-yellow-300 transition-all duration-300 text-white rounded-lg px-8 py-4 text-center font-semibold absolute bottom-4 m-auto left-1/2"
-                        style="transform: translate(-50%, 0);"
-                        onclick="rastgeleDuyguIste()">
-                    🎲 Rastgele Duygu İste
-                </button>
+            <button class="bg-yellow-400 hover:bg-yellow-300 transition-all duration-300 text-white rounded-lg px-8 py-4 text-center font-semibold absolute bottom-4 m-auto left-1/2"
+                    style="transform: translate(-50%, 0);"
+                    onclick="rastgeleDuyguIste()">
+                🎲 Rastgele Duygu İste
+            </button>
         </div>
 
         <div id="wrapper-statlar"
-             class="flex flex-col gap-4 justify-center items-center border-2 border-zinc-200 p-8 rounded-xl w-full mb-4">
-            <div class="flex gap-8 min-w-[350px] sm:min-w-[400px] md:min-w-[700px] flex-wrap lg:flex-nowrap">
-
-
+             class="flex flex-col gap-4 justify-center items-center border-2 border-zinc-200 py-4 px-8 rounded-xl w-full mb-4">
+            <div id="secilmis-duygu" class="flex justify-center items-center gap-2" style="display: none">
+                <span class="text-neutral-500 text-2xl text-center">Seçilmiş Duygu: </span>
+                <img alt="yapilmadi" src="/static/images/decline.png" width="32" height="32">
+                <img alt="yapildi" src="/static/images/accept.png" width="32" height="32">
+            </div>
+            <div class="flex gap-6 min-w-[350px] sm:min-w-[400px] md:min-w-[700px] flex-wrap lg:flex-nowrap">
                 <div id="statlar-happy" class="stat-card">
                     <img src="static/images/happy.png" alt="happy" style="width: 48px; height: 48px">
                     <p>Mutlu</p>
