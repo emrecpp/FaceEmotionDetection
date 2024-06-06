@@ -10,6 +10,7 @@ model_text = joblib.load(open("../model/model_text.pkl", "rb"))
 
 
 
+
 app = Flask(__name__)
 
 class ShareData(object):
