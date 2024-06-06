@@ -1,9 +1,14 @@
 import json
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 
 TEST = False
 if not TEST:
     from utils.VideoCamera import VideoCamera
+
+import joblib
+model_text = joblib.load(open("../model/model_text.pkl", "rb"))
+
+
 
 app = Flask(__name__)
 
@@ -38,6 +43,22 @@ def stats():
                     "angry": {"percentage": "0.33", "title": "Kızgın"},
                     "disgust": {"percentage": "1.74", "title": "İğrenmiş"}})
     return json.dumps(shareData.stats)
+
+
+@app.route("/speech", methods=["POST"])
+def speech():
+    jsonData = request.json
+    text = jsonData.get("text", "")
+    result = model_text.predict([text])
+    result = result[0] if len(result) > 0 else "Bilinmiyor"
+    if result == "joy":
+        result = "happy"
+    elif result == "anger":
+        result = "angry"
+    elif result == "sadness":
+        result = "sad"
+
+    return {"text": text, "result": result}
 
 if __name__ == '__main__':
     app.run(debug=False)
