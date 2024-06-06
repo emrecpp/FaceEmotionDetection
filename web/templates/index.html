@@ -19,7 +19,7 @@
 
                     let enYuksekSkorluDuygu = Object.keys(data).reduce((a, b) => data[a].percentage > data[b].percentage ? a : b);
                     //console.log("enYuksekSkorluDuygu: ", enYuksekSkorluDuygu, "secilmisDuygu", secilmisDuygu)
-                    if (enYuksekSkorluDuygu === secilmisDuygu) {
+                    if (enYuksekSkorluDuygu === secilmisDuygu.name) {
                         isSecilmisDuyguYapildi = true
                         updateDuyguTexts()
                     }
@@ -48,8 +48,8 @@
         function rastgeleDuyguIste() {
             let yeniDuygu;
             do {
-                yeniDuygu = ["happy", "neutral", "sad", "angry", "disgust", "fear", "surprise"][Math.floor(Math.random() * 7)]
-            } while (yeniDuygu === secilmisDuygu) // tekrar aynı duyguyu vermesin diye
+                yeniDuygu = [{name:"happy", turkish:"mutlu"}, {name:"neutral", turkish:"normal"}, {name:"sad", turkish:"üzgün"}, {name:"angry", turkish:"kızgın"}, {name:"disgust", turkish: "iğrenmiş"}, {name:"fear", turkish: "korkmuş"}, {name:"surprise", turkish:"şaşırmış"}][Math.floor(Math.random() * 7)]
+            } while (yeniDuygu?.name === secilmisDuygu?.name) // tekrar aynı duyguyu vermesin diye
             secilmisDuygu = yeniDuygu
             isSecilmisDuyguYapildi = false
             updateDuyguTexts()
@@ -64,7 +64,7 @@
 
             secilmisDuyguElement.style.display = secilmisDuygu !== null ? "flex" : "hidden"
 
-            secilenDuyguText.innerHTML = `Seçilmiş Duygu: <b>${secilmisDuygu}</b>`
+            secilenDuyguText.innerHTML = `Seçilmiş Duygu: <b>${secilmisDuygu.turkish}</b>`
 
             secilenDuyguYapildiImages[0].style.display = isSecilmisDuyguYapildi ? "none" : "block" // Çarpı
             secilenDuyguYapildiImages[1].style.display = !isSecilmisDuyguYapildi ? "none" : "block" // Okay
