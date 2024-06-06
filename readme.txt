@@ -1,3 +1,5 @@
+Emre Demircan - 1904040027
+
 Kurulum
 1)	Requirements.txt içindeki paketleri pythona yüklenmesi gerekmektedir. (pip install -r requirements.txt komuduyla yüklenebilir)
 2)	Web klasörü içerisindeki main.py dosyası python ile çalıştırılır. (python main.py)
