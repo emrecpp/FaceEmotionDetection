@@ -19,7 +19,7 @@
 
                     let enYuksekSkorluDuygu = Object.keys(data).reduce((a, b) => data[a].percentage > data[b].percentage ? a : b);
                     //console.log("enYuksekSkorluDuygu: ", enYuksekSkorluDuygu, "secilmisDuygu", secilmisDuygu)
-                    if (enYuksekSkorluDuygu === secilmisDuygu.name) {
+                    if (secilmisDuygu !== null && enYuksekSkorluDuygu === secilmisDuygu?.name) {
                         isSecilmisDuyguYapildi = true
                         updateDuyguTexts()
                     }
@@ -46,7 +46,7 @@
         let kalanHak = 3
 
         function rastgeleDuyguIste() {
-            let yeniDuygu;
+            let yeniDuygu;// {name:null, turkish:null};
             do {
                 yeniDuygu = [{name:"happy", turkish:"mutlu"}, {name:"neutral", turkish:"normal"}, {name:"sad", turkish:"üzgün"}, {name:"angry", turkish:"kızgın"}, {name:"disgust", turkish: "iğrenmiş"}, {name:"fear", turkish: "korkmuş"}, {name:"surprise", turkish:"şaşırmış"}][Math.floor(Math.random() * 7)]
             } while (yeniDuygu?.name === secilmisDuygu?.name) // tekrar aynı duyguyu vermesin diye
